@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import { translateText } from '../lib/translate'
 import { fetchAudioFromTTS } from '../lib/fetchAudio';
 import { useThemeContext } from '../contexts/themeContext';
@@ -67,6 +67,7 @@ export default function Request({query, source, target, doTranslate = false, onT
         return (
             <View>
                 <Text style={styles.text}>Translating...</Text>
+                <ActivityIndicator size="small" color={theme.text.color} />
             </View>
         );
     }
