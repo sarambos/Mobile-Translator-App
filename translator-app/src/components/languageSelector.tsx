@@ -60,7 +60,7 @@ const getStyles = (theme: any) => {
         StyleSheet.create({
             container: {
                 justifyContent: 'center',
-                width: 200,
+                width: "100%",
             },
             label: {
                 color: theme.text.color,

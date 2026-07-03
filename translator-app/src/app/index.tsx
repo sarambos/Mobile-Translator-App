@@ -81,7 +81,10 @@ export default function HomeScreen() {
         <LanguageSelector label="To" selectedLanguage={targetLanguage} onLanguageChange={setTargetLanguage} />
         <TouchableOpacity
           style={[styles.translateButton, !canTranslate && styles.disabledButton]}
-          onPress={() => canTranslate && setTranslate(true)}
+          onPress={() => {
+            setAudioBlob(null); // Clear previous audio when translating new text
+            setTranslate(false); // Reset the translate state to allow re-translation
+          }}
           disabled={!canTranslate}
           accessibilityRole="button"
         >
