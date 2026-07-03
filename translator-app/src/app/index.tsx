@@ -36,8 +36,8 @@ export default function HomeScreen() {
       } catch (error: any) {
         // console.error('Error playing audio:', error);
         Alert.alert(
-          'Audio Error',
-          error.message || 'Failed to play audio. Please try again.',
+          'Audio Playback Error',
+          error.message || 'Failed to play translated audio. Please try again.',
           [{ text: "OK", onPress: () => console.log("Alert dismissed") }]
         );
       } finally {
@@ -114,7 +114,8 @@ export default function HomeScreen() {
           target={targetLanguage}
           doTranslate={doTranslate}
           onTranslate={() => setTranslate(false)}
-          onAudioFetched={setAudioBlob} />
+          onAudioFetched={setAudioBlob}
+          onError={(title, message) => Alert.alert(title, message)} />
       </View>
       <StatusBar style="auto" />
     </ScrollView>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ActivityIndicator, Alert } from 'react-native';
+import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import { translateText } from '../lib/translate'
 import { fetchAudioFromTTS } from '../lib/fetchAudio';
 import { useThemeContext } from '../contexts/themeContext';
@@ -11,10 +11,11 @@ type Props = {
     target: string | null,
     doTranslate?: boolean,
     onTranslate?: () => void,
-    onAudioFetched?: (blob: Blob) => void
+    onAudioFetched?: (blob: Blob) => void,
+    onError?: (title: string, message: string) => void
 };
 
-export default function Request({query, source, target, doTranslate = false, onTranslate, onAudioFetched}: Props) {
+export default function Request({query, source, target, doTranslate = false, onTranslate, onAudioFetched, onError}: Props) {
     const [translated, setTranslated] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
@@ -47,12 +48,10 @@ export default function Request({query, source, target, doTranslate = false, onT
                             onAudioFetched(audioBlob);
                         }
                     } catch (audioError) {
-                        // console.error('Failed to fetch audio:', audioError);
-                        Alert.alert(
+                        onError?.(
                             'Audio Fetch Error',
-                            'Failed to fetch audio for the translated text. Please try again.',
-                            [{ text: "OK", onPress: () => console.log("Alert dismissed") }]
-                        );
+                            'Failed to fetch audio for the translated text. Please try again.'
+                        )
                     };
                 } catch (err: any) {
                     if (!mounted) return;
