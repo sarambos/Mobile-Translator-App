@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, TextInput, View, Text, TouchableOpacity, ScrollView } from 'react-native';
+import { StyleSheet, TextInput, View, Text, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import Request from '../components/request';
 import LanguageSelector from '../components/languageSelector';
 import { useThemeContext } from '../contexts/themeContext';
@@ -33,8 +33,13 @@ export default function HomeScreen() {
       try {
         setAudioPlaying(true);
         await playAudio(audioBlob);
-      } catch (error) {
-        console.error('Error playing audio:', error);
+      } catch (error: any) {
+        // console.error('Error playing audio:', error);
+        Alert.alert(
+          'Audio Error',
+          error.message || 'Failed to play audio. Please try again.',
+          [{ text: "OK", onPress: () => console.log("Alert dismissed") }]
+        );
       } finally {
         setAudioPlaying(false);
       }

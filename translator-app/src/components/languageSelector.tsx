@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Language } from "../data/languages";
 import RNPickerSelect from 'react-native-picker-select';
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, Alert } from "react-native";
 import { useThemeContext } from "../contexts/themeContext";
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { getLibreTranslateUrl } from "../lib/apiConfig";
@@ -24,8 +24,13 @@ export default function LanguageSelector({ label, selectedLanguage, onLanguageCh
                 const response = await fetch(`${getLibreTranslateUrl()}/languages`);
                 const languages: Language[] = await response.json();
                 setLanguages(languages);
-            } catch (error) {
-                console.error("Could not fetch languages:", error);
+            } catch (error: any) {
+                // console.error("Could not fetch languages:", error);
+                Alert.alert(
+                    'Fetch Error',
+                    error.message || 'Failed to fetch languages. Please try again.',
+                    [{ text: "OK", onPress: () => console.log("Alert dismissed") }]
+                );
             }
         };
         fetchLanguages();

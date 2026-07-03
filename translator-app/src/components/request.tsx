@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, ActivityIndicator, Alert } from 'react-native';
 import { translateText } from '../lib/translate'
 import { fetchAudioFromTTS } from '../lib/fetchAudio';
 import { useThemeContext } from '../contexts/themeContext';
@@ -47,8 +47,13 @@ export default function Request({query, source, target, doTranslate = false, onT
                             onAudioFetched(audioBlob);
                         }
                     } catch (audioError) {
-                        console.error('Failed to fetch audio:', audioError);
-                    }
+                        // console.error('Failed to fetch audio:', audioError);
+                        Alert.alert(
+                            'Audio Fetch Error',
+                            'Failed to fetch audio for the translated text. Please try again.',
+                            [{ text: "OK", onPress: () => console.log("Alert dismissed") }]
+                        );
+                    };
                 } catch (err: any) {
                     if (!mounted) return;
                     setError(String(err));

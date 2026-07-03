@@ -1,4 +1,5 @@
 import { Audio } from 'expo-av';
+import { Alert } from 'react-native';
 
 export async function playAudio(blob: Blob): Promise<void> {
     try {
@@ -22,21 +23,36 @@ export async function playAudio(blob: Blob): Promise<void> {
 
                     await sound.loadAsync({ uri });
                     await sound.playAsync();
-                } catch (error) {
-                    console.error('Error loading audio:', error);
+                } catch (error : any) {
+                    // console.error('Error loading audio:', error);
+                    Alert.alert(
+                        'Audio Playback Error',
+                        error.message || 'Failed to play audio. Please try again.',
+                        [{ text: "OK", onPress: () => console.log("Alert dismissed") }]
+                    );
                     reject(error);
                 }
             };
 
             reader.onerror = () => {
-                console.error('Error reading blob:', reader.error);
+                // console.error('Error reading blob:', reader.error);
+                Alert.alert(
+                    'Audio Read Error',
+                    reader.error?.message || 'Failed to read audio data. Please try again.',
+                    [{ text: "OK", onPress: () => console.log('Alert dismissed') }]
+                );
                 reject(reader.error);
             };
 
             reader.readAsDataURL(blob);
         });
-    } catch (error) {
-        console.error('Error playing audio:', error);
+    } catch (error: any) {
+        // console.error('Error playing audio:', error);
+        Alert.alert(
+            'Audio Playback Error',
+            error.message || 'Failed to play audio. Please try again.',
+            [{ text: "OK", onPress: () => console.log("Alert dismissed") }]
+        );
         throw error;
     }
 }
