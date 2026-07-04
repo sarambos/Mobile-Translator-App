@@ -1,93 +1,232 @@
 # Mobile Translator Application
-Stephanie Sarambo \
-December 7, 2025 \
-CSCI 6905 - Mobile Computing \
-East Carolina University \
-Professor Brian Dietrick
 
-## Overview
-This repository contains the code for a mobile translation application, meant for an Android device. 
+## Project Overview
+This repository contains the code for a cross-platform mobile translation application built with React Native and Expo that provides multilingual text translation and text-to-speech playback using Dockerized LibreTranslate and OpenTTS services.
 
-Note: this application should work for both Android and iOS, but the Text-to-Speech functionality is only supported on Android devices.
+The application allows users to:
 
-Users are able to select their starting language, type in a word/phrase, select a target language, and click 'Translate'. The application will translate the entered word/phrase into the selected language. Users also have the option to play an audio recording of the text. They can also toggle the theme of the application between light and dark modes.
+- Translate text between supported languages
+- Listen to translated text using text-to-speech
+- Swap source and target languages
+- Switch between light and dark themes
 
-In order to run this application, you need an Android emulator (or physical device) with the Expo Go app installed, and Docker with LibreTranslate and OpenTTS running locally. LibreTranslate needs to be running on port 5001, and OpenTTS on port 5500. See Getting Started for more details on starting this application.
+The application was developed with Expo and is designed to run locally using Docker. See Getting Started for more details on starting this application.
 
-## Getting Started
-1. Ensure you have Node.js installed. In the same directory as this repository, run:
-    ```zsh
-    node -v
-    ```
-    If you don't have Node.js installed, install it [here](https://nodejs.org/en).
+## Features
+- Text-to-text translation using LibreTranslate
+- Text-to-speech playback using OpenTTS
+- Dynamic language selection
+- Source/target language swapping
+- Light and dark themes
+- Responsive React Native interface
 
-    Note: npm should automatcally install with Node.js, but confirm its installation with:
-    ```zsh
-    npm -v
-    ```
-2. Ensure you have Docker installed. In the same directory as this repository, run:
-    ```zsh
-    docker -v
-    ```
-    If you don't have Docker installed, install it [here](https://www.docker.com/get-started/).
+## Demo
 
-    Note: You need to download Docker Desktop to run this application on your device. Docker was used to host the API servers for the translation and the Text-to-Speech services on a local device. This will also require you to download the free servers for both services, explained in the next steps.
-3. Start the Docker Container
+### Light Mode
 
-    As previously mentioned, this application uses two open source APIs. In order for the app to work on another device, Docker needs to be hosting these services on the local device.
-    Navigate into the directory with the `docker-compose.yml` file.
-    ```zsh
-    cd translator-app/src/Docker
-    ```
-    Then, run the following command to create and run the container:
-    ```zsh
-    docker-compose up -d
-    ```
-    If that gives you an error, try:
-    ```zsh
-    docker compose up -d
-    ```
-    After this, navigate back to the root directory of this repository.
-4. Install dependencies by running:
-    ```zsh
-    npm install
-    ``` 
-5. Run the Android emulator.
-    ```zsh
-    emulator -avd <EMULATOR_NAME>
-    ```
-6. On the Android emulator, ensure that you have the Expo Go app installed. You can download this in the Google Play store on the emulator. If that doesn't work, download it [here](https://expo.dev/go), open your file explorer/finder/etc., and drag and drop the application onto the emulator.
-7. In the terminal, navigate to the `translator-app` directory:
-    ```zsh
-    cd translator-app
-    ```
-    Run the following command to start the application server:
-    ```zsh
-    npx expo start
-    ```
-8. On the emulator, open Expo Go, and click 'Enter URL'. Copy and paste the Metro URL (it will look like this, `exp://<IP-ADDRESS>:<PORT-NUMBER>`), and click 'Connect'.
+<p align="center">
+  <img src="images/light_mode.png" width="250" height="600">
+  <img src="images/light_mode_with_translation.png" width="250" height="600">
+</p>
 
-## Technologies Used
-- VS Code
+### Dark Mode
+
+<p align="center">
+  <img src="images/dark_mode.png" width="250" height="600">
+  <img src="images/dark_mode_with_translation.png" width="250" height="600">
+</p>
+
+## Tech Stack
 - React Native
 - Expo
+- TypeScript
 - Docker
 - LibreTranslate
 - OpenTTS
-- Android Emulator
+- React Context API
 
-## Planned Features That Were Implemented
-1. Translation function (Text-to-Text Translation)
-2. Audio output (on click)
-3. List of supported languages
-4. Changeable Themes
-5. Basic Navigation
+## Architecture
 
-## Planned Features That Were Not Implemented
-1. Audio-to-Audio Translation
-    - I could not figure out how to enable the microphone of the Android emulator
-    - I ultimately ran out of time.
-2. Audio-in Translation
-    - The same reasons as above: running out of time and figuring out how to enable the microphone.
-3. Resetting to defaults at the click of a button
-    - I kind of forgot that I wanted to implement this feature. I think it could have been easy, but I realized too late that I wanted to do that.
+The application follows a client-service architecture.
+
+- React Native + Expo provide the mobile user interface.
+- LibreTranslate performs multilingual text translation.
+- OpenTTS generates speech for translated text.
+- Docker Compose hosts both services locally.
+- React Context manages application theme state.
+
+## Project Structured
+
+```text
+translator-app/
+|-- components/
+|-- contexts/
+|-- data/
+|-- lib/
+|-- src/
+|-- Docker/
+```
+
+## Getting Started
+
+### Prerequisites
+
+Before running the application, ensure the following software is installed:
+
+- Node.js (includes npm)
+- Docker Desktop
+- Android Studio (Android Emulator) or a physical Android device
+- Expo Go (if using a physical device)
+
+Verify your installation by running:
+
+```bash
+node -v
+npm -v
+docker -v
+```
+
+If you don't have Node.js installed, install it [here](https://nodejs.org/en). This should automatically install npm as well.
+
+If you don't have Docker installed, install it [here](https://www.docker.com/get-started/).
+
+### Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/sarambos/Mobile-Translator-App.git
+cd Mobile-Translator-App
+```
+
+Then, install the project dependencies:
+
+```bash
+cd translator-app
+npm install
+```
+
+### Running the Translation Services
+The application relies on two locally hosted services:
+
+- **LibreTranslate** – performs multilingual text translation.
+- **OpenTTS** – generates spoken audio for translated text.
+
+Both services are provided through Docker Compose.
+
+Navigate to the Docker directory:
+
+```bash
+cd src/Docker
+```
+
+Next, start the containers:
+
+```bash
+docker compose up -d
+```
+
+or, if you're using an older Docker version:
+
+```bash
+docker-compose up -d
+```
+
+Once the containers have started successfully:
+
+- LibreTranslate will be available on port 5001
+- OpenTTS will be available on port 5500
+
+Note: These services **must** remain running while using the application.
+
+### Starting the application
+
+Return to the project directory:
+
+```bash
+cd translator-app
+```
+
+Start the the Expo development server:
+
+```bash
+npx expo start
+```
+
+This launches Metro and displays a QR code (for physical devices) along with connection options for Android emulators.
+
+### Running the Android Emulator
+
+Start an Android Virtual Device (AVD) from Android Studio or using:
+
+```bash
+emulator -avd <EMULATOR_NAME>
+```
+
+Once the emulator is running:
+1. Open Expo Go
+2. Select **Enter URL**
+3. Copy the Metro URL from the terminal
+4. Paste the URL into Expo Go
+5. The application will launch automatically
+
+### Running on a Physical Device
+
+1. Install Expo Go from the App Store or Google Play
+2. Ensure your phone and development machine are connected to the same network
+3. Scan the QR code generated by Expo.
+
+### Troubleshooting
+
+#### Docker containers are not running
+
+Verify both services are active:
+
+```bash
+docker ps
+```
+
+Restart the containers if necessary:
+
+```bash
+docker compose up -d
+```
+
+or, if you have an older Docker version:
+
+```bash
+docker-compose up -d
+```
+
+#### Expo cannot connect
+
+- Verify your device and computer are on the same network
+- Confirm the Docker services are running
+- Restart the Expo development server
+
+#### Translation fails
+
+Confirm LibreTranslate is running on port **5001**.
+
+#### Audio playback fails
+
+Text-to-speech currently supports Android devices only. Ensure OpenTTS is running on port **5500**.
+
+## Future Improvements
+- Speech-to-speech Translation
+- Speech recognition for voice input
+- Translation history
+- Favorite Languages
+- Offline translation support
+- User preferences and settings
+
+## Lessons Learned
+
+This project strengthened my experience with:
+
+- React Native application architecture
+- TypeScript
+- REST API integration
+- Dockerized development environments
+- Asynchronous programming
+- React Context state management

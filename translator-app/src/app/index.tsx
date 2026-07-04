@@ -83,7 +83,7 @@ export default function HomeScreen() {
           style={[styles.translateButton, !canTranslate && styles.disabledButton]}
           onPress={() => {
             setAudioBlob(null); // Clear previous audio when translating new text
-            setTranslate(false); // Reset the translate state to allow re-translation
+            setTranslate(true);
           }}
           disabled={!canTranslate}
           accessibilityRole="button"
