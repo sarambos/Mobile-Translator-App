@@ -25,15 +25,15 @@ The application was developed with Expo and is designed to run locally using Doc
 ### Light Mode
 
 <p align="center">
-  <img src="images/light_mode.png" width="250" height="600">
-  <img src="images/light_mode_with_translation.png" width="250" height="600">
+  <img src="images/light_mode.png" width="250" height="550">
+  <img src="images/light_mode_with_translation.png" width="250" height="550">
 </p>
 
 ### Dark Mode
 
 <p align="center">
-  <img src="images/dark_mode.png" width="250" height="600">
-  <img src="images/dark_mode_with_translation.png" width="250" height="600">
+  <img src="images/dark_mode.png" width="250" height="550">
+  <img src="images/dark_mode_with_translation.png" width="250" height="550">
 </p>
 
 ## Tech Stack
