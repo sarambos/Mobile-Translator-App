@@ -55,7 +55,7 @@ The application follows a client-service architecture.
 - Docker Compose hosts both services locally.
 - React Context manages application theme state.
 
-## Project Structured
+## Project Structure
 
 ```text
 translator-app/
