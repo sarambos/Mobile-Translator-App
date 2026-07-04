@@ -1,5 +1,19 @@
 # Mobile Translator Application
 
+![React Native](https://img.shields.io/badge/React%20Native-0.79-blue)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue)
+![Expo](https://img.shields.io/badge/Expo-53-black)
+![Docker](https://img.shields.io/badge/Docker-blue)
+
+## Key Technical Highlights
+
+- Built with React Native and Expo
+- Integrated LibreTranslate and OpenTTS APIs
+- Dockerized local development environment
+- Centralized API configuration
+- Light/Dark theme support using React Context
+- Modular TypeScript architecture
+
 ## Project Overview
 This repository contains the code for a cross-platform mobile translation application built with React Native and Expo that provides multilingual text translation and text-to-speech playback using Dockerized LibreTranslate and OpenTTS services.
 
